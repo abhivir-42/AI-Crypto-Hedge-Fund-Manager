@@ -15,6 +15,7 @@ from typing import Optional, Dict, Any
 
 from uagents import Context
 from uagents.network import get_faucet, get_ledger
+from uagents.setup import fund_agent_if_low
 from cosmpy.crypto.address import Address
 from cosmpy.aerial.client import LedgerClient
 from cosmpy.aerial.config import NetworkConfig

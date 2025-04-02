@@ -17,12 +17,12 @@ from typing import Any, Dict, Optional
 from dotenv import load_dotenv
 from uagents import Agent, Context
 
-# Import request and response models
-from crypto_project.models.requests import ASI1Request
-from crypto_project.models.responses import ASI1Response
+# Use relative imports
+from ..models.requests import ASI1Request
+from ..models.responses import ASI1Response
 
 # Import the improved ASI1 service
-from crypto_project.services.llm_service import ASI1Service, LLMError, TradingSignal
+from ..services.llm_service import ASI1Service, LLMError, TradingSignal
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -32,10 +32,10 @@ logger = logging.getLogger(__name__)
 class AgentConfig:
     """Configuration for the ASI1 agent."""
     name: str = "ASI1 Reasoning agent for crypto trading signals"
-    port: int = 8018
+    port: int = 9018
     seed_env_var: str = "ASI1_AGENT_SEED"
     default_seed: str = "asi1_reasoning_agent_seed_phrase"
-    endpoint: str = "http://127.0.0.1:8018/submit"
+    endpoint: str = "http://127.0.0.1:9018/submit"
 
 
 class ASI1ReasoningAgent:

@@ -19,11 +19,11 @@ import os
 from dotenv import load_dotenv
 from uagents import Agent, Context
 
-# Import request and response models
-from crypto_project.models.requests import (
+# Use relative imports
+from ..models.requests import (
     CoinRequest, CryptonewsRequest, ASI1Request, FGIRequest
 )
-from crypto_project.models.responses import (
+from ..models.responses import (
     CoinResponse, CryptonewsResponse, ASI1Response, FGIResponse, FearGreedData
 )
 
@@ -103,9 +103,9 @@ class MainCryptoAgent:
         
         # Agent addresses (loaded from environment variables with defaults)
         self.COIN_AGENT = os.getenv("COIN_AGENT_ADDRESS", "agent1qw6cxgq4l8hmnjctm43q97vajrytuwjc2e2n4ncdfpqk6ggxcfmxuwdc9rq")
-        self.FGI_AGENT = os.getenv("FGI_AGENT_ADDRESS", "agent1qgzh245lxeaapd32mxlwgdf2607fkt075hymp06rceknjnc2ylznwdv8up7")
-        self.REASON_AGENT = os.getenv("REASON_AGENT_ADDRESS", "agent1qwlg48h8sstknk7enc2q44227ahq6dr5mjg0p7z62ca6tfueze38kyrtyl2")
-        self.CRYPTONEWS_AGENT = os.getenv("CRYPTONEWS_AGENT_ADDRESS", "agent1q2cq0q3cnhccudx6cym8smvpquafsd99lrwexppuecfrnv90xlrs5lsxw6k")
+        self.FGI_AGENT = os.getenv("FGI_AGENT_ADDRESS", "agent1q248t3vk8f60y3dqsr2nzu93h7tpz26dy62l4ejdtl9ces2sml8ask8zmdp")
+        self.REASON_AGENT = os.getenv("REASON_AGENT_ADDRESS", "agent1qgrvpwve5f9emqes3vux9uwkstpjcl5ykmfe6sd8wh2fyhpwrptssttez3y")
+        self.CRYPTONEWS_AGENT = os.getenv("CRYPTONEWS_AGENT_ADDRESS", "agent1q0ear5f66ljucqhjyehu6mw7ug2c498hwlsfndzv5wmkqvmahz7ggmg6tq9")
         
         # Create the agent
         agent_seed = os.getenv("MAIN_AGENT_SEED", "this_is_main_agent_to_run")

@@ -40,7 +40,7 @@ class FearGreedIndexAgent(BaseAgent):
         """Initialize the Fear & Greed Index agent."""
         super().__init__(
             name="FearGreedIndexAgent",
-            port=8010,
+            port=9010,
             seed=os.getenv("FGI_AGENT_SEED", "fgi_agent1_secret_phrase")
         )
         
@@ -64,6 +64,7 @@ class FearGreedIndexAgent(BaseAgent):
             msg: FGI request message
         """
         self.logger.info(f"Received FGI request from {sender} for {msg.limit} entries")
+        print(f"DEBUG: Received FGI request from {sender} for {msg.limit} entries")
         
         try:
             # Get Fear & Greed Index data
@@ -81,6 +82,7 @@ class FearGreedIndexAgent(BaseAgent):
             
         except Exception as e:
             self.logger.error(f"Error processing FGI request: {e}")
+            print(f"ERROR: Failed to process FGI request: {str(e)}")
             
             # Send error response with empty data
             error_response = FGIResponse(
@@ -116,6 +118,7 @@ class FearGreedIndexAgent(BaseAgent):
         
         try:
             self.logger.debug(f"Requesting data from CoinMarketCap for {limit} entries")
+            print(f"DEBUG: Requesting data from CoinMarketCap with API key: {self.cmc_api_key[:5]}...")
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()  # Raises error for non-200 responses
             
@@ -138,7 +141,23 @@ class FearGreedIndexAgent(BaseAgent):
         
         except requests.exceptions.RequestException as e:
             log_exception(self.logger, e, "CoinMarketCap API request failed")
-            raise APIError(f"Failed to fetch data from CoinMarketCap: {e}")
+            self.logger.warning("Using mock FGI data instead")
+            print("WARNING: Using mock FGI data instead")
+            
+            # Create mock FGI data
+            mock_data = [
+                FearGreedData(
+                    value=70.0,
+                    value_classification="Greed",
+                    timestamp=datetime.now(timezone.utc).isoformat()
+                )
+            ]
+            
+            return FGIResponse(
+                data=mock_data,
+                status="mock",
+                timestamp=datetime.now(timezone.utc).isoformat()
+            )
 
 
 # Application entry point

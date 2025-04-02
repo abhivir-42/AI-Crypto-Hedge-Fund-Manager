@@ -36,7 +36,7 @@ class CoinInfoAgent(BaseAgent):
         """Initialize the Coin Info agent."""
         super().__init__(
             name="CoinInfoAgent",
-            port=8009,
+            port=9009,
             seed=os.getenv("COIN_INFO_AGENT_SEED", "coin_info_agent1_secret_phrase")
         )
         

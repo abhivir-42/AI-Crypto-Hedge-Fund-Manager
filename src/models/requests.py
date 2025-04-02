@@ -37,6 +37,7 @@ class ASI1Request(Model):
 
 class FGIRequest(Model):
     """Request for Fear and Greed Index information."""
+    limit: Optional[int] = 1
     ready: str = "ready"
 
 

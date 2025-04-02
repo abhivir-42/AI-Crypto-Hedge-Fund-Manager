@@ -17,16 +17,13 @@ from uagents import Context
 
 # Use relative imports
 from .base import BaseAgent
-from ..models.requests import NewsRequest
-from ..models.responses import NewsResponse
+from ..models.requests import NewsRequest, CryptonewsRequest
+from ..models.responses import NewsResponse, CryptonewsResponse
 from ..utils.errors import APIError
 from ..utils.logging import log_exception
 
 from dotenv import load_dotenv
 from newsapi import NewsApiClient
-
-from crypto_project.models.requests import CryptonewsRequest
-from crypto_project.models.responses import CryptonewsResponse
 
 
 class CryptoNewsAgent(BaseAgent):
@@ -41,7 +38,7 @@ class CryptoNewsAgent(BaseAgent):
         """Initialize the Crypto News agent."""
         super().__init__(
             name="CryptoNewsAgent",
-            port=8016,
+            port=9016,
             seed=os.getenv("CRYPTO_NEWS_AGENT_SEED", "newsnewshehhee_agent1_secret_phrase")
         )
         
